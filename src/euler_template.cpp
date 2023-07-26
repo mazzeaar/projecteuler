@@ -34,16 +34,16 @@ unsigned long solution()
     // TODO: Implement solution here
 
     return solution;
-};
+}
 
 int main()
 {
     std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
 
-    unsigned long solution = solution();
+    unsigned long sol = solution();
 
     double runtime = std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::steady_clock::now() - begin).count();
 
-    print(runtime, solution);
+    print(runtime, sol);
     return 0;
 }
