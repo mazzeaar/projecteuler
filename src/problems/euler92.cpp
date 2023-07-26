@@ -1,6 +1,7 @@
 #include <iostream>
 #include <chrono>
 #include <iomanip>
+#include <algorithm>
 
 /*
  * --------------------------------
@@ -8,6 +9,12 @@
  * https://projecteuler.net/problem=92
  * --------------------------------
  * @amazzetta
+ *
+ * ################################
+ * #  Problem 92
+ * #  Solved in: 506118 µs (506 ms)
+ * #  Solution: 8581146
+ * ################################
  */
 
 void print(double runtime, long int solution = 0)
@@ -36,23 +43,46 @@ int get_next(int n)
     {
         tmp = (n % 10);
         n /= 10;
-        next += tmp * tmp;
+        next += (tmp * tmp);
     }
+
     return next;
 }
 
 unsigned long solution()
 {
-    unsigned long solution = 0;
-    int n = 10;
-    for ( int i = 0;i < 10;++i )
+    unsigned long count = 0;
+    int range = static_cast<int>(1e7);
+
+    std::vector<bool> cycle(range, false); // no number exceeds the range, max = 7 * 9^2
+
+    for ( int i = 1; i < range; ++i )
     {
-        std::cout << n;
-        n = get_next(n);
-        std::cout << " -> " << n;
+        int num = i;
+        std::vector<int> chain;
+
+        while ( std::find(chain.begin(), chain.end(), num) == chain.end() )
+        {
+            chain.push_back(num);
+            num = get_next(num);
+
+            if ( num == 1 )
+            {
+                break;
+            }
+            else if ( cycle[num] || num == 89 )
+            {
+                for ( int& n : chain )
+                {
+                    cycle[n] = true;
+                }
+                ++count;
+                break;
+            }
+        }
     }
 
-    return solution;
+    return count;
 }
 
 int main()
@@ -64,5 +94,6 @@ int main()
     double runtime = std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::steady_clock::now() - begin).count();
 
     print(runtime, sol);
+
     return 0;
 }
