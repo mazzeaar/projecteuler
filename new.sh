@@ -15,7 +15,6 @@ if [ -f "$target_file" ]; then
 fi
 
 cp "$template_file" "$target_file"
-read -p "Enter problem description: " description
-awk -v num="$number" -v desc="$description" '{gsub("{NUMBER}", num); gsub("{DESCRIPTION}", desc); print}' "$template_file" > "$target_file"
+awk -v num="$number" '{gsub("{NUMBER}", num); print}' "$template_file" > "$target_file"
 
 echo "Created Euler problem file: $target_file"
