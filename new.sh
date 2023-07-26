@@ -1,6 +1,10 @@
 #!/bin/bash
 
-number=$1
+if [ -z "$1" ]; then
+  read -p "Enter Euler problem number: " number
+else
+  number=$1
+fi
 
 template_file="src/euler_template.cpp"
 target_file="src/problems/euler$number.cpp"
@@ -11,6 +15,7 @@ if [ -f "$target_file" ]; then
 fi
 
 cp "$template_file" "$target_file"
+read -p "Enter problem description: " description
 awk -v num="$number" -v desc="$description" '{gsub("{NUMBER}", num); gsub("{DESCRIPTION}", desc); print}' "$template_file" > "$target_file"
 
 echo "Created Euler problem file: $target_file"
