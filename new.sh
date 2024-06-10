@@ -18,3 +18,4 @@ cp "$template_file" "$target_file"
 awk -v num="$number" '{gsub("{NUMBER}", num); print}' "$template_file" > "$target_file"
 
 echo "Created Euler problem file: $target_file"
+code $target_file
