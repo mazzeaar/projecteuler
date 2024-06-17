@@ -70,6 +70,7 @@ std::vector<size_t> PrimeGenerator::get_divisors(size_t n)
         divisors = new_divisors;
     }
 
+    divisors.pop_back();
     return divisors;
 }
 

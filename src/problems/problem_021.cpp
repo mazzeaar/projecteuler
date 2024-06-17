@@ -13,7 +13,6 @@ inline int get_sum(int num, std::vector<int>& memo)
     for ( size_t divisor : divisors ) {
         memo[num] += divisor;
     }
-    memo[num] -= num;
 
     return memo[num];
 }
