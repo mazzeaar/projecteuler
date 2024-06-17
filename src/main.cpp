@@ -1,28 +1,27 @@
 #include <iostream>
-#include <cstdlib>
+#include <string>
+#include <iomanip>
 
-int main(int argc, char** argv)
+#include "euler_utils.h"
+
+int main(int argc, char* argv[])
 {
-    if ( argc != 2 )
-    {
-        std::cout << "Usage: ./executable <number>\n";
-        return 1;
+    auto& problems = ProblemList::getProblems();
+    if ( argc > 1 ) {
+        int problem_number = std::stoi(argv[1]);
+        auto it = problems.find(problem_number);
+        if ( it != problems.end() ) {
+            it->second();
+        }
+        else {
+            std::cout << ProblemList::format_problem(problem_number) << " not found!" << std::endl;
+        }
     }
-
-    int number = std::atoi(argv[1]);
-    std::string file_path = "src/problems/euler" + std::to_string(number) + ".cpp";
-    std::string command = "g++ -std=c++17 -O3 -march=native -o executable " + file_path;
-
-    int result = std::system(command.c_str());
-
-    if ( result == 0 )
-    {
-        std::cout << "Running Euler problem " << number << "...\n";
-        std::system("./executable");
-    }
-    else
-    {
-        std::cout << "Error: Failed to compile " << file_path << "\n";
+    else {
+        std::cout << "Running all problems sequentially:\n";
+        for ( const auto& [number, problem] : problems ) {
+            ProblemList::print_problem(number, problem);
+        }
     }
 
     return 0;

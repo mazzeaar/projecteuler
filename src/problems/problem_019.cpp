@@ -1,37 +1,4 @@
-#include <iostream>
-#include <chrono>
-#include <iomanip>
-#include <cassert>
-
-/*
- * --------------------------------
- * Problem: '19'
- * https://projecteuler.net/problem=19
- * --------------------------------
- * @amazzetta
- *
- * ################################
- * #  Problem 19
- * #  Solved in: 336 µs (0 ms)
- * #  Solution: 171
- * ################################
- */
-
-void print(double runtime, long int solution = 0)
-{
-    if ( solution == 0 ) {
-        std::cout << "\nSolution to problem 19 is not implemented yet!\n\n";
-        return;
-    }
-
-    std::cout << "\n################################\n"
-        << "#  Problem 19\n"
-        << "#  Solved in: " << std::fixed << std::setprecision(0) << runtime << " µs (" << runtime / 1000 << " ms)\n"
-        << "#  Solution: " << solution << "\n"
-        << "################################\n";
-}
-
-// --------------------------------
+#include "euler_utils.h"
 
 struct Date {
     int day, month, year;
@@ -119,9 +86,9 @@ struct Date {
     }
 };
 
-unsigned long solution()
+size_t solve_problem_19()
 {
-    unsigned long solution = 0;
+    size_t result = 0;
 
     Date date(1, 1, 1900);
     while ( date.year < 1901 ) {
@@ -130,22 +97,13 @@ unsigned long solution()
 
     while ( date < Date(31, 12, 2000) ) {
         if ( date.isSunday() && date.day == 1 ) {
-            ++solution;
+            ++result;
         }
         ++date;
     }
 
-    return solution;
+    ASSERT_EQUAL(result, 171);
+    return result;
 }
 
-int main()
-{
-    std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
-
-    unsigned long sol = solution();
-
-    double runtime = std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::steady_clock::now() - begin).count();
-
-    print(runtime, sol);
-    return 0;
-}
+REGISTER_PROBLEM(solve_problem_19, 19)

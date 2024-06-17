@@ -1,40 +1,4 @@
-#include <iostream>
-#include <chrono>
-#include <iomanip>
-#include <string>
-#include <cassert>
-
-/*
- * --------------------------------
- * Problem: '17'
- * https://projecteuler.net/problem=17
- * --------------------------------
- * @amazzetta
- *
- * Really annoying problem to solve, its not clean and its not efficient, but it works.
- *
- * ################################
- * #  Problem 17
- * #  Solved in : 26 µs(0 ms)
- * #  Solution : 21124
- * ################################
- */
-
-void print(double runtime, long int solution = 0)
-{
-    if ( solution == 0 ) {
-        std::cout << "\nSolution to problem 17 is not implemented yet!\n\n";
-        return;
-    }
-
-    std::cout << "\n################################\n"
-        << "#  Problem 17\n"
-        << "#  Solved in: " << std::fixed << std::setprecision(0) << runtime << " µs (" << runtime / 1000 << " ms)\n"
-        << "#  Solution: " << solution << "\n"
-        << "################################\n";
-}
-
-// --------------------------------
+#include "euler_utils.h"
 
 int get_decimal(int n)
 {
@@ -91,8 +55,6 @@ int get_decas(int n)
     }
 }
 
-// --------------------------------
-
 unsigned long long get_char_count(int n)
 {
     unsigned long long value = 0;
@@ -124,25 +86,15 @@ unsigned long long get_char_count(int n)
     return value;
 }
 
-unsigned long solution()
+size_t solve_problem_17()
 {
-    unsigned long solution = 0;
-
+    size_t result = 0;
     for ( int i = 1; i <= 1000; ++i ) {
-        solution += get_char_count(i);
+        result += get_char_count(i);
     }
 
-    return solution;
+    ASSERT_EQUAL(result, 21124);
+    return result;
 }
 
-int main()
-{
-    std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
-
-    unsigned long sol = solution();
-
-    double runtime = std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::steady_clock::now() - begin).count();
-
-    print(runtime, sol);
-    return 0;
-}
+REGISTER_PROBLEM(solve_problem_17, 17)
