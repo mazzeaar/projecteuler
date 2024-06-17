@@ -46,7 +46,6 @@ std::vector<size_t> PrimeGenerator::get_prime_factors(size_t n)
 std::vector<size_t> PrimeGenerator::get_divisors(size_t n)
 {
     const auto primes = get_prime_factors(n);
-
     std::unordered_map<size_t, size_t> prime_count;
     for ( const size_t p : primes ) {
         prime_count[p]++;
