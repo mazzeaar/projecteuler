@@ -4,7 +4,7 @@
 #include <iostream>
 #include <cmath>
 #include <vector>
-
+#include <cstdint>
 
 #include "utils/problem_list.h"
 

@@ -13,6 +13,7 @@ std::string get_nth_permutation(std::string& s, int n)
         permutation += s[idx];
         s.erase(s.begin() + idx);
     }
+
     return permutation;
 }
 
@@ -34,7 +35,4 @@ REGISTER_PROBLEM(solve_problem_24, 24)
 012
 021
 102
-
-
-
 */
