@@ -2,7 +2,7 @@
 
 i64 solve_problem_{NUMBER}()
 {
-    size_t result = 0;
+    i64 result = 0;
     return result;
 }
 
