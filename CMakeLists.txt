@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.10)
 project(ProjectEuler)
 
 # Set the C++ standard
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 # Add include directories
@@ -30,3 +30,10 @@ add_custom_target(run
 
 # Add option to specify problem number
 set(PROBLEM_NUMBER "" CACHE STRING "Problem number to run")
+
+# Set compiler flags for different build types
+set(CMAKE_CXX_FLAGS_DEBUG "-g -O0 -Wall -Werror")
+set(CMAKE_CXX_FLAGS_RELEASE "-O3 -Wall -Werror")
+
+# Optional: Print the build type being used
+message(STATUS "Build type: ${CMAKE_BUILD_TYPE}")
