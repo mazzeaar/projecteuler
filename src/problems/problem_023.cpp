@@ -30,7 +30,9 @@ size_t solve_problem_23()
     for ( int i = 0; i < abundand.size(); ++i ) {
         for ( int j = i; j < abundand.size(); ++j ) {
             const size_t num = abundand[i] + abundand[j];
-            is_sum[num] = true;
+            if ( num < max ) {
+                is_sum[num] = true;
+            }
         }
     }
 

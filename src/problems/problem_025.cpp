@@ -91,7 +91,7 @@ size_t solve_problem_25()
     */
 
     /*
-    NOTE: the code works, but somehow i get freed checksum error like 70 percent of the time...
+    NOTE: the code works, but somehow i get 'freed checksum' errors like 70% of the time...
     I dont know why, so this problem will remain hardcoded to avoid this:)
     */
 

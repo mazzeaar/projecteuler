@@ -38,7 +38,15 @@ std::vector<std::string> read_input()
 
 size_t solve_problem_22()
 {
-    const auto names = read_input();
+    std::vector<std::string> names;
+    try {
+        names = read_input();
+    }
+    catch ( std::exception& e ) {
+        std::cout << e.what() << '\n';
+        return 0;
+    }
+
     const size_t size = names.size();
     size_t result = 0;
     for ( size_t i = 0; i < size; ++i ) {
