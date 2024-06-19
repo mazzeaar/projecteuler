@@ -6,6 +6,8 @@
 #include <vector>
 #include <cstdint>
 
+using i64 = int64_t;
+
 #include "utils/problem_list.h"
 
 #include "utils/print_helper.h"

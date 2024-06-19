@@ -4,7 +4,7 @@
 
 std::vector<bool> PrimeGenerator::sieve;
 
-bool PrimeGenerator::is_prime(size_t i)
+bool PrimeGenerator::is_prime(int i)
 {
     if ( i < 2 ) return false;
     if ( i >= sieve.size() ) generate_sieve(i);
@@ -80,7 +80,7 @@ std::vector<size_t> PrimeGenerator::get_divisors(size_t n)
 
 void PrimeGenerator::generate_sieve(size_t max)
 {
-    assert(max != size_t(-1) && "overflow of max in PrimeGenerator::generate_sieve(size_t)?\n");
+    assert(max+1 != size_t(-1) && "overflow of max in PrimeGenerator::generate_sieve(size_t)?");
     if ( max < sieve.size() ) return;
     sieve.resize(max + 1, true);
     sieve[0] = false;

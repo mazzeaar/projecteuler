@@ -7,7 +7,7 @@
 
 class PrimeGenerator {
 public:
-    static bool is_prime(size_t i);
+    static bool is_prime(int i);
     static std::vector<size_t> get_primes(size_t max);
     static std::vector<size_t> get_prime_factors(size_t n);
     static std::vector<size_t> get_divisors(size_t n);

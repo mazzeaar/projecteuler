@@ -1,6 +1,6 @@
 #include "euler_utils.h"
 
-size_t solve_problem_{NUMBER}()
+i64 solve_problem_{NUMBER}()
 {
     size_t result = 0;
     return result;

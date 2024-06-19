@@ -7,7 +7,7 @@
 #include <iomanip>
 
 struct ProblemList {
-    using ProblemFunction = std::function<size_t()>;
+    using ProblemFunction = std::function<i64()>;
 
     static std::map<int, ProblemFunction>& getProblems()
     {
