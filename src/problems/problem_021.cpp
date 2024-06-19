@@ -30,7 +30,7 @@ size_t solve_problem_21()
             continue;
         }
 
-        if ( get_sum(b, memo) == a ) {
+        if ( c == a ) {
             amicable.insert(a);
             amicable.insert(b);
         }

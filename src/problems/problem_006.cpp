@@ -4,7 +4,7 @@
 size_t solve_problem_006()
 {
     const size_t n = 100;
-    std::vector<int> squares = [&n] ()
+    std::vector<int> squares = [ ] ()
     {
         std::vector<int> s(n+1, 0);
         for ( int i = 0; i <= n; ++i ) {

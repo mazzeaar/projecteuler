@@ -29,7 +29,7 @@ size_t solve_problem_11()
     const int N = 20;   // grid dimension
 
     // a real sliding window would probably be faster
-    auto calculate_max_product = [&nums, N, n] (int dx, int dy)
+    auto calculate_max_product = [&nums] (int dx, int dy)
     {
         size_t max_product = 0;
         for ( int row = 0; row < N; ++row ) {
