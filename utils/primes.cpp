@@ -1,5 +1,6 @@
 #include "utils/primes.h"
 #include <unordered_map>
+#include <assert>
 
 std::vector<bool> PrimeGenerator::sieve;
 
@@ -79,6 +80,7 @@ std::vector<size_t> PrimeGenerator::get_divisors(size_t n)
 
 void PrimeGenerator::generate_sieve(size_t max)
 {
+    assert(max != size_t(-1) && "overflow of max in PrimeGenerator::generate_sieve(size_t)?\n");
     if ( max < sieve.size() ) return;
     sieve.resize(max + 1, true);
     sieve[0] = false;
