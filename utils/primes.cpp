@@ -1,6 +1,6 @@
 #include "utils/primes.h"
 #include <unordered_map>
-#include <assert>
+#include <cassert>
 
 std::vector<bool> PrimeGenerator::sieve;
 
