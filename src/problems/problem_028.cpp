@@ -6,7 +6,6 @@ i64 solve_problem_28()
     i64 result = 1;
 
     int num = 1;
-
     for ( int step = 2; step < size; step += 2 ) {
         for ( int i = 0; i < 4; ++i ) {
             num += step;
