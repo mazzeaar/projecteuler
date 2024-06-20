@@ -6,24 +6,32 @@ project(ProjectEuler)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-# Add include directories
 include_directories(${CMAKE_SOURCE_DIR}/include)
 
-# Add subdirectory for utils
 add_subdirectory(utils)
 
-# Find all problem files
 file(GLOB PROBLEM_FILES "src/problems/*.cpp")
 
-# Add an executable for the main file
 add_executable(main src/main.cpp ${PROBLEM_FILES})
-
-# Link the utils library
 target_link_libraries(main utils)
 
-# Add custom target for running problems
-add_custom_target(run
+# runs a specific problem number
+add_custom_target(run_specific
     COMMAND ${CMAKE_COMMAND} -E env "N=${PROBLEM_NUMBER}" ./main ${PROBLEM_NUMBER}
+    DEPENDS main
+    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+)
+
+# runs all problems sequentially
+add_custom_target(test
+    COMMAND ./main "all"
+    DEPENDS main
+    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+)
+
+# runs the problem with the highest number
+add_custom_target(run
+    COMMAND ./main
     DEPENDS main
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
 )
@@ -31,9 +39,9 @@ add_custom_target(run
 # Add option to specify problem number
 set(PROBLEM_NUMBER "" CACHE STRING "Problem number to run")
 
-# Set compiler flags for different build types
+# compiler flags for debug/release
 set(CMAKE_CXX_FLAGS_DEBUG "-g -O0 -Wall -Werror")
 set(CMAKE_CXX_FLAGS_RELEASE "-O3 -Wall -Werror")
 
-# Optional: Print the build type being used
+# print the buildtype being used
 message(STATUS "Build type: ${CMAKE_BUILD_TYPE}")

@@ -34,8 +34,17 @@ struct ProblemList {
         return output;
     }
 
-    static void print_problem(int n, ProblemList::ProblemFunction func)
+    static void print_problem(int n)
     {
+        auto& problems = getProblems();
+        auto it = problems.begin();
+        if ( (it = problems.find(n)) == problems.end() ) {
+            std::cout << "Problem " << n << " not found!\n";
+            return;
+        }
+
+        ProblemList::ProblemFunction func = it->second;
+
         const std::string problem_text = format_problem(n) + ": ";
         std::cout << std::left << std::setw(20) << problem_text;
 
