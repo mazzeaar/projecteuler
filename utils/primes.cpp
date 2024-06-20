@@ -1,36 +1,37 @@
-#include "utils/primes.h"
+#include "euler_utils.h"
+
 #include <unordered_map>
 #include <cassert>
 
 std::vector<bool> PrimeGenerator::sieve;
 
-bool PrimeGenerator::is_prime(int i)
+bool PrimeGenerator::is_prime(i64 i)
 {
     if ( i < 2 ) return false;
     if ( i >= sieve.size() ) generate_sieve(i);
     return sieve[i];
 }
 
-std::vector<size_t> PrimeGenerator::get_primes(size_t max)
+std::vector<i64> PrimeGenerator::get_primes(i64 max)
 {
     generate_sieve(max);
-    std::vector<size_t> primes;
-    for ( size_t i = 2; i <= max; ++i ) {
+    std::vector<i64> primes;
+    for ( i64 i = 2; i <= max; ++i ) {
         if ( sieve[i] ) primes.push_back(i);
     }
     return primes;
 }
 
-std::vector<size_t> PrimeGenerator::get_prime_factors(size_t n)
+std::vector<i64> PrimeGenerator::get_prime_factors(i64 n)
 {
-    std::vector<size_t> factors_n;
+    std::vector<i64> factors_n;
 
     while ( n % 2 == 0 ) {
         factors_n.push_back(2);
         n /= 2;
     }
 
-    for ( size_t i = 3; i * i <= n; i += 2 ) {
+    for ( i64 i = 3; i * i <= n; i += 2 ) {
         while ( n % i == 0 ) {
             factors_n.push_back(i);
             n /= i;
@@ -44,25 +45,25 @@ std::vector<size_t> PrimeGenerator::get_prime_factors(size_t n)
     return factors_n;
 }
 
-std::vector<size_t> PrimeGenerator::get_divisors(size_t n)
+std::vector<i64> PrimeGenerator::get_divisors(i64 n)
 {
     const auto primes = get_prime_factors(n);
-    std::unordered_map<size_t, size_t> prime_count;
-    for ( const size_t p : primes ) {
+    std::unordered_map<i64, i64> prime_count;
+    for ( const i64 p : primes ) {
         prime_count[p]++;
     }
 
-    std::vector<size_t> divisors = { 1 };
+    std::vector<i64> divisors = { 1 };
 
     for ( const auto& pair : prime_count ) {
-        size_t prime = pair.first;
-        size_t count = pair.second;
+        i64 prime = pair.first;
+        i64 count = pair.second;
 
-        std::vector<size_t> new_divisors;
+        std::vector<i64> new_divisors;
 
-        for ( const size_t& divisor : divisors ) {
-            size_t current = 1;
-            for ( size_t i = 0; i <= count; ++i ) {
+        for ( const i64& divisor : divisors ) {
+            i64 current = 1;
+            for ( i64 i = 0; i <= count; ++i ) {
                 new_divisors.push_back(divisor * current);
                 current *= prime;
             }
@@ -78,17 +79,17 @@ std::vector<size_t> PrimeGenerator::get_divisors(size_t n)
     return divisors;
 }
 
-void PrimeGenerator::generate_sieve(size_t max)
+void PrimeGenerator::generate_sieve(i64 max)
 {
-    assert(max+1 != size_t(-1) && "overflow of max in PrimeGenerator::generate_sieve(size_t)?");
+    assert(max+1 != i64(-1) && "overflow of max in PrimeGenerator::generate_sieve(i64)?");
     if ( max < sieve.size() ) return;
     sieve.resize(max + 1, true);
     sieve[0] = false;
     sieve[1] = false;
 
-    for ( size_t p = 2; p * p <= max; ++p ) {
+    for ( i64 p = 2; p * p <= max; ++p ) {
         if ( sieve[p] ) {
-            for ( size_t i = p * p; i <= max; i += p ) {
+            for ( i64 i = p * p; i <= max; i += p ) {
                 sieve[i] = false;
             }
         }

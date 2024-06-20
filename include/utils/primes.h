@@ -7,15 +7,15 @@
 
 class PrimeGenerator {
 public:
-    static bool is_prime(int i);
-    static std::vector<size_t> get_primes(size_t max);
-    static std::vector<size_t> get_prime_factors(size_t n);
-    static std::vector<size_t> get_divisors(size_t n);
+    static bool is_prime(i64 i);
+    static std::vector<i64> get_primes(i64 max);
+    static std::vector<i64> get_prime_factors(i64 n);
+    static std::vector<i64> get_divisors(i64 n);
 
 private:
     static std::vector<bool> sieve;
 
-    static void generate_sieve(size_t max);
+    static void generate_sieve(i64 max);
 };
 
 #endif // PRIMES_H
