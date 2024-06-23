@@ -52,9 +52,15 @@ void run_last_problem(Problems& problems)
 void run_all_problems(Problems& problems)
 {
     std::cout << "Running all problems sequentially:\n";
+    auto begin = std::chrono::high_resolution_clock::now();
     for ( const auto& [number, _] : problems ) {
         ProblemList::print_problem(number);
     }
+    auto end = std::chrono::high_resolution_clock::now();
+    auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end - begin).count();
+    std::cout << "----------------\n"
+        << "Took " << duration << "ms\n"
+        << "----------------\n";
 }
 
 void run_specific_problem(Problems& problems, int n)
