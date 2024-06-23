@@ -4,7 +4,7 @@ int count_digits(i64 n)
 {
     int d = 0;
     for ( ; n != 0; n /= 10 ) ++d;
-    return d-1;
+    return d;
 }
 
 i64 permute(i64 n, int size)
@@ -14,7 +14,7 @@ i64 permute(i64 n, int size)
         100000, 1000000
     };
 
-    return (n / 10) + (digits[size] * (n % 10));
+    return (n / 10) + (digits[size - 1] * (n % 10));
 }
 
 i64 solve_problem_35()
@@ -30,16 +30,15 @@ i64 solve_problem_35()
             continue;
         }
 
-        std::vector<i64> cur_perms = { p };
-
         const int size = count_digits(p);
+        std::vector<i64> cur_perms = { p };
         i64 n = permute(p, size);
         while ( PrimeGenerator::is_prime(n) && n != cur_perms.front() ) {
             cur_perms.push_back(n);
             n = permute(n, size);
         }
 
-        if ( n != cur_perms.front() ) {
+        if ( n != p ) {
             continue;
         }
 
