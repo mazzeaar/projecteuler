@@ -2,9 +2,12 @@
 #define UTILS_H
 
 #include <iostream>
+
 #include <cmath>
-#include <vector>
 #include <cstdint>
+
+#include <vector>
+#include <set>
 
 using i64 = int64_t;
 
@@ -15,7 +18,6 @@ using i64 = int64_t;
 #include "utils/factorial.h"
 #include "utils/fib.h"
 #include "utils/math.h"
-
 
 #include <sstream>
 #define ASSERT_EQUAL(calculated, expected) \
