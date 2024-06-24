@@ -1,19 +1,5 @@
 #include "euler_utils.h"
 
-bool is_pandigital(int n)
-{
-    int digits = 0;
-    for ( ; n != 0; n /= 10 ) {
-        int d = n % 10;
-        if ( d == 0 )
-            return false;
-
-        digits |= (0x1 << d);
-    }
-
-    return digits == 0x3fe;
-}
-
 int64_t concatenated_product(int n)
 {
     // to not use std::pow(10, product) all the time
@@ -46,7 +32,11 @@ i64 solve_problem_38()
     i64 best_candidate = 0;
     for ( int n = 192; n < 10000; ++n ) {
         int64_t candidate = concatenated_product(n);
-        if ( is_pandigital(candidate) && candidate > best_candidate ) {
+
+        if ( candidate < 1 || candidate > 987654321 ) {
+            continue;
+        }
+        if ( candidate <= 987654321 && math::is_pandigital(candidate) && candidate > best_candidate ) {
             best_candidate = candidate;
         }
     }
