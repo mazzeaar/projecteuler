@@ -31,7 +31,7 @@ i64 solve_problem_49()
             const auto c = b + b - a;
 
             if ( c > 9999 || a == 1487 ) {
-                continue; // skip example case and too large numbers
+                continue; // skip example case and out of range numbers
             }
 
             if ( PrimeGenerator::is_prime(c) ) {
