@@ -1,38 +1,27 @@
 #include "euler_utils.h"
 
-std::string& get_next()
+i64 get_next()
 {
     static std::string digits = "0123456789";
 
-    if ( !std::next_permutation(digits.begin(), digits.end()) ) {
-        digits = "";
-    }
-    else if ( digits[0] == '0' ) {
-        return get_next();
+    while ( std::next_permutation(digits.begin(), digits.end()) ) {
+        if ( digits[0] != '0' ) {
+            return std::stoll(digits);
+        }
     }
 
-    return digits;
+    return i64(-1); // no more permutations
 }
 
-bool has_property(const std::string& n)
+
+bool has_property(i64 n)
 {
-    if ( n == "" || n[5] != '5' || (n[3] - '0') % 2 != 0 ) // 4x speedup from this line lol
-        return false;
-
-    int num;
-    int idx = 1;
-    for ( auto divisor : { 2, 3, 5, 7, 11, 13, 17 } ) {
-        if ( n[idx] == '0' ) {
-            num = std::stoi(n.substr(idx+1, 2));
-        }
-        else {
-            num = std::stoi(n.substr(idx, 3));
-        }
-
-        if ( num % divisor != 0 )
+    static const int divisors[] = { 17, 13, 11, 7, 5, 3, 2 };
+    for ( auto divisor : divisors ) {
+        if ( (n % 1000) % divisor != 0 )
             return false;
 
-        ++idx;
+        n /= 10;
     }
 
     return true;
@@ -40,18 +29,18 @@ bool has_property(const std::string& n)
 
 i64 solve_problem_43()
 {
-
     i64 result = 0;
+    i64 permutation = 0;
 
-    std::string permutation = "";
     do {
         if ( has_property(permutation) ) {
-            result += std::stoull(permutation);
+            result += permutation;
             if ( result == 16695334890 ) break;
         }
 
         permutation = get_next();
-    } while ( permutation != "" );
+    } while ( permutation != i64(-1) );
+
 
     ASSERT_EQUAL(result, 16695334890);
     return result;
