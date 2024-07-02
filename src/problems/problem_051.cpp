@@ -1,15 +1,6 @@
 #include "euler_utils.h"
 
 /*
-1. assume prime is max 8 digits long
-2. use uint8_t, generate all possible masks... how tho lol? like 0b110011 to delete the two middle digits, but how can this be done?
-3. then mask all the primes, and put them in a map. if one element of the map has 8 entries we found the solution.
-
-check all primes starting from 1000?
-do freq map?
-*/
-
-/*
 replace the masked digits
 so: replace(12345, 0b00101, 7) -> 12747
 */
