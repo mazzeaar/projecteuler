@@ -26,6 +26,25 @@ namespace math {
         return digits == mask;
     }
 
+    template<typename T>
+    inline T get_reverse(T num)
+    {
+        T reversed_num = 0;
+
+        while ( num > 0 ) {
+            reversed_num = reversed_num * 10 + num % 10;
+            num /= 10;
+        }
+
+        return reversed_num;
+    }
+
+    template <typename T>
+    inline bool is_palindrome(T num)
+    {
+        return num == get_reverse(num);
+    }
+
     inline bool is_hexagonal_number(i64 H)
     {
         const double n = (std::sqrt(8.0 * H + 1) + 1) / 4;
