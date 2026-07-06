@@ -6,7 +6,7 @@ if [ -z "$1" ]; then
 fi
 
 # Format the problem number to be three digits long with leading zeros
-PPPROBLEM_NUMBER=$(printf "%03d" $1)
+PPPROBLEM_NUMBER=$(printf "%03d" "$1")
 PROBLEM_NUMBER=$1
 TEMPLATE_FILE="../src/problems/problem_template.txt"
 PROBLEM_FILE="../src/problems/problem_${PPPROBLEM_NUMBER}.cpp"
@@ -16,5 +16,5 @@ if [ -f "$PROBLEM_FILE" ]; then
     exit 1
 fi
 
-sed "s/{NUMBER}/${PROBLEM_NUMBER}/g" $TEMPLATE_FILE > $PROBLEM_FILE
+sed "s/{NUMBER}/${PROBLEM_NUMBER}/g" $TEMPLATE_FILE >"$PROBLEM_FILE"
 echo "Created $PROBLEM_FILE"
